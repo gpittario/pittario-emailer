@@ -1,0 +1,21 @@
+
+
+<%= form_tag send_email_path, method: "POST" do %>
+  <div class="form-group email-addresses">
+    <% if User.count == 0 %>
+      There are no users. <%= link_to "Create Some", new_user_path %> <br>
+    <% end %>
+    <label for="users_ids">To</label>
+    <%= collection_check_boxes :users, :ids, User.all, :id, :to_s, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <%= text_field_tag :subject, '', placeholder: "subject", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="body">Body</label> <br>
+    <%= text_area_tag :body, '', placeholder: "body", class: "form-control" %>
+  </div>
+
+  <%= button_tag :submit %>
+<% end %>
